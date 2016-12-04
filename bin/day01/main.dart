@@ -15,7 +15,6 @@ const String input =
     "R5, R1, L1, L4, L5, R2, R4, L3, L5, R2, R3, L4, L1, R2, R3, R5, L2, L3, "
     "R3, R1, R3";
 
-
 enum Direction { NORTH, EAST, SOUTH, WEST }
 
 main(List<String> args) {
