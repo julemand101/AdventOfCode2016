@@ -1,8 +1,6 @@
 // --- Day 2: Bathroom Security ---
 // http://adventofcode.com/2016/day/2
 
-import 'dart:math' as math;
-
 List<String> inputs = [
   "UULLULLUULLLURDLDUURRDRRLDURDULLRURDUDULLLUULURURLRDRRRRULDRUULLLLUUDURDULD"
       "RRDRUDLRRLDLUDLDDRURURUURRRDDDLLRUDURDULUULLRRULLRULDUDRDRLDLURURUDDUDLURUD"
@@ -40,31 +38,46 @@ List<String> inputs = [
 ];
 
 main(List<String> args) {
-  List<List> keypad = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
+  List<List> a = [
+    [" ", " ", " ", " ", " "],
+    [" ", "1", "2", "3", " "],
+    [" ", "4", "5", "6", " "],
+    [" ", "7", "8", "9", " "],
+    [" ", " ", " ", " ", " "],
   ];
 
-  int x = 1;
-  int y = 1;
+  print("Solution 1: ${solve(a, 2, 2)}");
 
+  List<List> b = [
+    [" ", " ", " ", " ", " ", " ", " "],
+    [" ", " ", " ", "1", " ", " ", " "],
+    [" ", " ", "2", "3", "4", " ", " "],
+    [" ", "5", "6", "7", "8", "9", " "],
+    [" ", " ", "A", "B", "C", " ", " "],
+    [" ", " ", " ", "D", " ", " ", " "],
+    [" ", " ", " ", " ", " ", " ", " "],
+  ];
+
+  print("Solution 2: ${solve(b, 1, 3)}");
+}
+
+String solve(List<List> keypad, int x, int y) {
   StringBuffer sb = new StringBuffer();
 
   for (String input in inputs) {
     for (int i = 0; i < input.length; i++) {
       switch (input[i]) {
         case "U": // UP
-          x = math.max(x - 1, 0);
+          x = (keypad[x-1][y] != " ") ? x-1 : x;
           break;
         case "D": // DOWN
-          x = math.min(x + 1, 2);
+          x = (keypad[x+1][y] != " ") ? x+1 : x;
           break;
         case "L": // LEFT
-          y = math.max(y - 1, 0);
+          y = (keypad[x][y-1] != " ") ? y-1 : y;
           break;
         case "R": // RIGHT
-          y = math.min(y + 1, 2);
+          y = (keypad[x][y+1] != " ") ? y+1 : y;
           break;
       }
     }
@@ -72,5 +85,5 @@ main(List<String> args) {
     sb.write("${keypad[x][y]}");
   }
 
-  print("Code: $sb");
+  return sb.toString();
 }
