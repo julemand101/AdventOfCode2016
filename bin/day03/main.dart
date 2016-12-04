@@ -21,6 +21,7 @@ main(List<String> args) async {
     }
   });
 
+  print("Answer: $count");
 }
 
 bool check(int a, int b, int c) {
