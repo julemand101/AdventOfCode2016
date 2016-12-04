@@ -61,6 +61,12 @@ main(List<String> args) async {
 
     if (sb.toString() == hash) {
       sum += id;
+
+      if (getDecryptedName(line, id).contains("northpole object storage")) {
+        print("Answer B:");
+        print("$line - decypt: ${getDecryptedName(line, id)} - id: $id");
+        print("");
+      }
     }
   });
 
@@ -86,4 +92,58 @@ String getName(String line) {
   }
 
   return result.toString();
+}
+
+List<String> alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z"
+];
+
+String getDecryptedName(String line, int id) {
+  List<String> nameParts = line.split("-");
+  nameParts.removeLast();
+
+  StringBuffer sb = new StringBuffer();
+
+  String encryptedString = nameParts.join(" ");
+
+  for (int i = 0; i < encryptedString.length; i++) {
+    String value = encryptedString[i];
+
+    if (value == " ") {
+      sb.write(" ");
+      continue;
+    }
+
+    int pos = alphabet.indexOf(value);
+    int newPos = (pos + id) % alphabet.length;
+
+    sb.write(alphabet[newPos]);
+  }
+
+  return sb.toString();
 }
