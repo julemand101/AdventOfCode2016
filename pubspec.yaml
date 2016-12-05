@@ -1,5 +1,5 @@
 name: AdventOfCode2016
 version: 0.0.1
 description: Solutions for Advent of Code 2016
-#dependencies:
-#  foo_bar: '>=1.0.0 <2.0.0'
+dependencies:
+  crypto:
