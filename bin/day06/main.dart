@@ -25,9 +25,17 @@ main(List<String> args) async {
 
   StringBuffer sb = new StringBuffer();
   for (Multiset s in msg) {
-    sb.write(s.distinct
-        .fold("", (prev, element) => (s[element] > s[prev]) ? element : prev));
+    sb.write(s.distinct.fold(
+        s.first, (prev, element) => (s[element] > s[prev]) ? element : prev));
   }
 
-  print("Message: $sb");
+  print("Message A: $sb");
+
+  sb.clear();
+  for (Multiset s in msg) {
+    sb.write(s.distinct.fold(
+        s.first, (prev, element) => (s[element] < s[prev]) ? element : prev));
+  }
+
+  print("Message B: $sb");
 }
