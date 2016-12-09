@@ -11,7 +11,11 @@ main(List<String> args) async {
       .transform(new LineSplitter())
       .first;
 
-  StringBuffer output = new StringBuffer();
+  print("Decompressed length: ${decompress(input)}");
+}
+
+int decompress(String input) {
+  int count = 0;
   StringBuffer buffer = new StringBuffer();
   bool markerRead = false;
 
@@ -29,20 +33,15 @@ main(List<String> args) async {
       int chars = int.parse(ls[0]);
       int repeat = int.parse(ls[1]);
 
-      print("$chars : $repeat");
-
-      String s = input.substring(i+1,i+chars+1);
-      for (int k = 0; k < repeat; k++) {
-        output.write(s);
-      }
+      count += decompress(input.substring(i+1,i+chars+1)) * repeat;
       i += chars;
     } else if (char == "(" || markerRead) {
       buffer.write(char);
       markerRead = true;
     } else {
-      output.write(char);
+      count++;
     }
   }
-  print(output);
-  print("Decompressed length: ${output.length}");
+
+  return count;
 }
