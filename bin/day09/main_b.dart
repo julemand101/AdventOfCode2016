@@ -33,7 +33,7 @@ int decompress(String input) {
       int chars = int.parse(ls[0]);
       int repeat = int.parse(ls[1]);
 
-      count += decompress(input.substring(i+1,i+chars+1)) * repeat;
+      count += decompress(input.substring(i + 1, i + chars + 1)) * repeat;
       i += chars;
     } else if (char == "(" || markerRead) {
       buffer.write(char);
