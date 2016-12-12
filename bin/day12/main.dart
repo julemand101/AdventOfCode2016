@@ -35,7 +35,35 @@ main(List<String> args) {
   register["c"] = 0;
   register["d"] = 0;
 
-  while (pos < register.length) {
-    
+  while (pos < input.length) {
+    List<String> command = input[pos].split(" ");
+    print(command);
+
+    if (command[0] == "cpy") {
+      int value = getValue(command[1], register);
+      String reg = command[2];
+      register[reg] = value;
+    } else if (command[0] == "inc") {
+      String reg = command[1];
+      register[reg]++;
+    } else if (command[0] == "dec") {
+      String reg = command[1];
+      register[reg]--;
+    } else if (command[0] == "jnz") {
+      int value = getValue(command[1], register);
+
+      if (value != 0) {
+        pos += getValue(command[2], register);
+        continue;
+      }
+    }
+
+    pos++;
   }
+
+  print(register);
+}
+
+int getValue(String input, Map<String, int> register) {
+  return int.parse(input, onError: (String source) => register[source]);
 }
