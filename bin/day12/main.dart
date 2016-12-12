@@ -28,16 +28,29 @@ List<String> input = [
 ];
 
 main(List<String> args) {
-  int pos = 0;
+  // A - After executing the assembunny code in your puzzle input, what value
+  // is left in register a?
   Map<String, int> register = new Map();
   register["a"] = 0;
   register["b"] = 0;
   register["c"] = 0;
   register["d"] = 0;
+  print("Answer A: ${runProgram(input, register)}");
 
-  while (pos < input.length) {
-    List<String> command = input[pos].split(" ");
-    print(command);
+  // B - If you instead initialize register c to be 1, what value is now left
+  // in register a?
+  register["a"] = 0;
+  register["b"] = 0;
+  register["c"] = 1;
+  register["d"] = 0;
+  print("Answer B: ${runProgram(input, register)}");
+}
+
+int runProgram(List<String> program, Map<String, int> register) {
+  int pos = 0;
+
+  while (pos < program.length) {
+    List<String> command = program[pos].split(" ");
 
     if (command[0] == "cpy") {
       int value = getValue(command[1], register);
@@ -61,7 +74,7 @@ main(List<String> args) {
     pos++;
   }
 
-  print(register);
+  return register["a"];
 }
 
 int getValue(String input, Map<String, int> register) {
