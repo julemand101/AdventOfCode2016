@@ -35,8 +35,6 @@ List<String> input = [
 ];
 
 main(List<String> args) {
-  // A - After executing the assembunny code in your puzzle input, what value
-  // is left in register a?
   Map<String, int> register = new Map();
 
   for (int i = 0; i < 10000; i++) {
@@ -62,7 +60,8 @@ main(List<String> args) {
   }
 }
 
-Iterable<int> runProgram(List<String> program, Map<String, int> register) sync* {
+Iterable<int> runProgram(
+    List<String> program, Map<String, int> register) sync* {
   int pos = 0;
 
   while (pos < program.length) {
