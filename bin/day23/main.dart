@@ -1,7 +1,7 @@
 // --- Day 23: Safe Cracking ---
 // http://adventofcode.com/2016/day/23
 
-List<List<String>> input = [
+List<String> input = [
   "cpy a b",
   "dec b",
   "cpy a d",
@@ -28,7 +28,7 @@ List<List<String>> input = [
   "jnz d -2",
   "inc c",
   "jnz c -5",
-].map((String line) => line.split(" ")).toList(growable: false);
+];
 
 main(List<String> args) {
   Map<String, int> register = new Map();
@@ -36,7 +36,13 @@ main(List<String> args) {
   register["b"] = 0;
   register["c"] = 0;
   register["d"] = 0;
-  print("Answer A: ${runProgram(input, register)}");
+  print("Answer A: ${runProgram(parse(input), register)}");
+
+  register["a"] = 12; // the number of eggs
+  register["b"] = 0;
+  register["c"] = 0;
+  register["d"] = 0;
+  print("Answer B: ${runProgram(parse(input), register)}");
 }
 
 int runProgram(List<List<String>> program, Map<String, int> register) {
@@ -107,4 +113,8 @@ int runProgram(List<List<String>> program, Map<String, int> register) {
 
 int getValue(String input, Map<String, int> register) {
   return int.parse(input, onError: (String source) => register[source]);
+}
+
+List<List<String>> parse(List<String> source) {
+  return source.map((String line) => line.split(" ")).toList(growable: false);
 }
